@@ -73,4 +73,91 @@ export const DBnomicsClient = {
       "Inflation IPCH (%)"
     );
   },
+
+  /**
+   * Convenience: French gross fixed capital formation — FBCF (quarterly, current prices).
+   * Series: Eurostat/namq_10_gdp/Q.CP_MNAC.SCA.P51G.FR
+   */
+  async getCapitalFormation(): Promise<DataPoint[]> {
+    return DBnomicsClient.getSeriesData(
+      "Eurostat/namq_10_gdp/Q.CP_MNAC.SCA.P51G.FR",
+      "FBCF (M€ courants)"
+    );
+  },
+
+  // ─── Health series ────────────────────────────────────────────────────────
+
+  /**
+   * Life expectancy at birth — France (annual).
+   * sex: "T" (total) | "F" (females) | "M" (males)
+   * Series: Eurostat/demo_mlexpec/A.YR.{sex}.Y_LT1.FR
+   */
+  async getLifeExpectancy(sex: "T" | "F" | "M" = "T"): Promise<DataPoint[]> {
+    const labels = { T: "Espérance de vie (ans)", F: "Femmes (ans)", M: "Hommes (ans)" };
+    return DBnomicsClient.getSeriesData(
+      `Eurostat/demo_mlexpec/A.YR.${sex}.Y_LT1.FR`,
+      labels[sex]
+    );
+  },
+
+  /**
+   * Public health expenditure per inhabitant (EUR/hab, annual).
+   * Series: Eurostat/hlth_sha11_hf/A.EUR_HAB.HF1.FR
+   */
+  async getHealthExpenditurePerCapita(): Promise<DataPoint[]> {
+    return DBnomicsClient.getSeriesData(
+      "Eurostat/hlth_sha11_hf/A.EUR_HAB.HF1.FR",
+      "Dépenses publiques santé (€/hab)"
+    );
+  },
+
+  /**
+   * Public health expenditure as % of GDP (annual).
+   * Series: Eurostat/hlth_sha11_hf/A.PC_GDP.HF1.FR
+   */
+  async getHealthExpenditureGDP(): Promise<DataPoint[]> {
+    return DBnomicsClient.getSeriesData(
+      "Eurostat/hlth_sha11_hf/A.PC_GDP.HF1.FR",
+      "Dépenses publiques santé (% PIB)"
+    );
+  },
+
+  /**
+   * Standardised death rate, all causes — France (annual).
+   * sex: "T" | "F" | "M"
+   * Series: Eurostat/hlth_cd_acdr2/A.RT.{sex}.TOTAL.A-R_V-Y.FR
+   */
+  async getStandardizedMortality(sex: "T" | "F" | "M" = "T"): Promise<DataPoint[]> {
+    const labels = {
+      T: "Mortalité standardisée (pour 100k)",
+      F: "Mortalité — Femmes",
+      M: "Mortalité — Hommes",
+    };
+    return DBnomicsClient.getSeriesData(
+      `Eurostat/hlth_cd_acdr2/A.RT.${sex}.TOTAL.A-R_V-Y.FR`,
+      labels[sex]
+    );
+  },
+
+  /**
+   * Total number of practising physicians — France (annual).
+   * Series: Eurostat/hlth_rs_phys/A.NR.TOTAL.T.FR
+   */
+  async getDoctorCount(): Promise<DataPoint[]> {
+    return DBnomicsClient.getSeriesData(
+      "Eurostat/hlth_rs_phys/A.NR.TOTAL.T.FR",
+      "Médecins (effectif total)"
+    );
+  },
+
+  /**
+   * Convenience: French GFCF annual growth rate (%, vs previous year).
+   * Series: Eurostat/nama_10_gdp/A.CLV_PCH_PRE.P51G.FR
+   */
+  async getInvestmentRate(): Promise<DataPoint[]> {
+    return DBnomicsClient.getSeriesData(
+      "Eurostat/nama_10_gdp/A.CLV_PCH_PRE.P51G.FR",
+      "Variation FBCF (% vs an préc.)"
+    );
+  },
 };

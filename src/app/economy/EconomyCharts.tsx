@@ -10,6 +10,7 @@ import { TimeSeriesChart } from "@/components/charts/TimeSeriesChart";
 import { FranceMap } from "@/components/map/FranceMap";
 import { ExportButton } from "@/components/shared/ExportButton";
 import type { DataPoint } from "@/types";
+import { parsePeriod } from "@/lib/utils";
 
 // Synthetic department-level unemployment data (real data would come from INSEE API)
 // Replace with actual API call to INSEEClient.getSeries() per department.
@@ -29,7 +30,7 @@ function filterByPeriod(data: DataPoint[], period: Period): DataPoint[] {
   const years = period === "5Y" ? 5 : 10;
   const cutoff = new Date();
   cutoff.setFullYear(cutoff.getFullYear() - years);
-  return data.filter((d) => new Date(d.date) >= cutoff);
+  return data.filter((d) => parsePeriod(d.date) >= cutoff);
 }
 
 interface EconomyChartsProps {

@@ -13,6 +13,21 @@ export function formatValue(value: number, unit: string): string {
   return unit ? `${formatted} ${unit}` : formatted;
 }
 
+/**
+ * Parse any DBnomics period string into a Date.
+ * Handles: "YYYY-QX", "YYYY-MM", "YYYY"
+ */
+export function parsePeriod(period: string): Date {
+  const q = period.match(/^(\d{4})-Q(\d)$/);
+  if (q) {
+    const month = (parseInt(q[2]) - 1) * 3 + 1;
+    return new Date(`${q[1]}-${String(month).padStart(2, "0")}-01`);
+  }
+  if (/^\d{4}-\d{2}$/.test(period)) return new Date(`${period}-01`);
+  if (/^\d{4}$/.test(period)) return new Date(`${period}-01-01`);
+  return new Date(period);
+}
+
 /** Normalize a period string to a short display label */
 export function periodLabel(period: string): string {
   // "2023-Q1" → "T1 2023"

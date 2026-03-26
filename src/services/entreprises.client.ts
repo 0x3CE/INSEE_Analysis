@@ -56,6 +56,23 @@ export const EntreprisesClient = {
   },
 
   /**
+   * Get a sample of companies (optionally filtered by department).
+   * Uses a broad query since the API requires a non-empty `q`.
+   */
+  async getRecent(departement?: string, perPage = 10): Promise<Entreprise[]> {
+    // "société" covers a broad range of registered entities
+    const params = new URLSearchParams({ q: "société", per_page: String(perPage) });
+    if (departement) params.set("departement", departement);
+    const url = `${BASE_URL}/search?${params}`;
+    const res = await fetch(url, {
+      next: { revalidate: Number(process.env.REVALIDATE_SECONDS ?? 3600) },
+    });
+    if (!res.ok) throw new Error(`Entreprises API failed [${res.status}]`);
+    const json: SearchResult = await res.json();
+    return json.results;
+  },
+
+  /**
    * Count total registered companies per department.
    * Returns a map of departement code → count.
    */
