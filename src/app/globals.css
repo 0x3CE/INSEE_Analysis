@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* DSFR Marianne font — served via system stack fallback; swap for self-hosted if needed */
+@layer base {
+  :root {
+    --dsfr-blue: #003189;
+    --dsfr-red: #e1000f;
+  }
+
+  body {
+    font-family: "Marianne", system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Skeleton shimmer utility */
+@layer utilities {
+  .skeleton {
+    @apply bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:200%_100%] animate-shimmer rounded;
+  }
+}
