@@ -160,4 +160,41 @@ export const DBnomicsClient = {
       "Variation FBCF (% vs an préc.)"
     );
   },
+
+  // ─── Social series ─────────────────────────────────────────────────────────
+
+  /**
+   * At-risk-of-poverty rate — France (annual, 40% mean income threshold).
+   * sex: "T" (total) | "F" (females) | "M" (males)
+   * Series: Eurostat/ilc_li02/A.PC.LI_R_M40.{sex}.TOTAL.FR
+   */
+  async getPovertyRate(sex: "T" | "F" | "M" = "T"): Promise<DataPoint[]> {
+    const labels = { T: "Taux de pauvreté (%)", F: "Femmes (%)", M: "Hommes (%)" };
+    return DBnomicsClient.getSeriesData(
+      `Eurostat/ilc_li02/A.PC.LI_R_M40.${sex}.TOTAL.FR`,
+      labels[sex]
+    );
+  },
+
+  /**
+   * Gini coefficient of equivalised disposable income — France (annual).
+   * Series: Eurostat/ilc_di12/A.TOTAL.GINI_HND.FR
+   */
+  async getGiniCoefficient(): Promise<DataPoint[]> {
+    return DBnomicsClient.getSeriesData(
+      "Eurostat/ilc_di12/A.TOTAL.GINI_HND.FR",
+      "Coefficient de Gini"
+    );
+  },
+
+  /**
+   * People at risk of poverty or social exclusion — France (annual, %).
+   * Series: Eurostat/ilc_peps01/A.PC.TOTAL.T.FR
+   */
+  async getPovertyOrExclusion(): Promise<DataPoint[]> {
+    return DBnomicsClient.getSeriesData(
+      "Eurostat/ilc_peps01/A.PC.TOTAL.T.FR",
+      "Risque pauvreté ou exclusion (%)"
+    );
+  },
 };

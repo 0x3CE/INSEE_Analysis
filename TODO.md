@@ -2,9 +2,9 @@
 
 ## En cours / À faire
 
-- [ ] **Module Social** — RSA, taux de pauvreté, inégalités par région
-  - Vérifier les series IDs DBnomics disponibles AVANT d'écrire le code (même pattern que pour Health)
-  - Stub existant : `src/app/social/page.tsx`
+- [x] **Module Social** — taux de pauvreté H/F, Gini, risque exclusion, carte par département
+  - Eurostat: `ilc_li02` (pauvreté), `ilc_di12` (Gini), `ilc_peps01` (exclusion)
+  - Carte statique INSEE FiLoSoFi 2021 (seuil 60% médian)
 
 - [ ] **Mode Comparaison** — 2 départements côte à côte
   - Composant prévu : `src/components/shared/ComparePanel.tsx`
