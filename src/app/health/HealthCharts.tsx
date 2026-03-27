@@ -8,22 +8,7 @@ import { FranceMap } from "@/components/map/FranceMap";
 import { ExportButton } from "@/components/shared/ExportButton";
 import type { DataPoint } from "@/types";
 import { parsePeriod } from "@/lib/utils";
-
-// Densité médicale par département (médecins pour 100 000 hab) — DREES 2023
-// Source : DREES, Atlas de la démographie médicale en France
-const DOCTOR_DENSITY_BY_DEPT: { code: string; value: number }[] = [
-  { code: "75", value: 580 }, { code: "69", value: 340 }, { code: "13", value: 310 },
-  { code: "34", value: 330 }, { code: "06", value: 390 }, { code: "31", value: 320 },
-  { code: "67", value: 300 }, { code: "33", value: 295 }, { code: "44", value: 270 },
-  { code: "59", value: 240 }, { code: "76", value: 230 }, { code: "57", value: 220 },
-  { code: "35", value: 260 }, { code: "92", value: 480 }, { code: "93", value: 195 },
-  { code: "94", value: 350 }, { code: "38", value: 285 }, { code: "74", value: 270 },
-  { code: "29", value: 245 }, { code: "56", value: 240 }, { code: "22", value: 230 },
-  { code: "35", value: 260 }, { code: "49", value: 255 }, { code: "85", value: 220 },
-  { code: "87", value: 260 }, { code: "63", value: 290 }, { code: "2A", value: 200 },
-  { code: "2B", value: 190 }, { code: "971", value: 180 }, { code: "972", value: 175 },
-  { code: "974", value: 160 }, { code: "973", value: 145 },
-];
+import { DEPT_DOCTORS } from "@/lib/departmentData";
 
 type Period = "5Y" | "10Y" | "ALL";
 const PERIOD_LABELS: Record<Period, string> = { "5Y": "5 ans", "10Y": "10 ans", ALL: "Tout" };
@@ -239,7 +224,7 @@ export function HealthCharts({
           </p>
         </div>
         <FranceMap
-          data={DOCTOR_DENSITY_BY_DEPT}
+          data={DEPT_DOCTORS}
           unit="/ 100k hab"
           colorScale={["#e8edff", "#003189"]}
         />

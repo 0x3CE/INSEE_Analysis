@@ -1,20 +1,5 @@
 # Todo — Observatoire National
 
-## En cours / À faire
-
-- [x] **Module Social** — taux de pauvreté H/F, Gini, risque exclusion, carte par département
-  - Eurostat: `ilc_li02` (pauvreté), `ilc_di12` (Gini), `ilc_peps01` (exclusion)
-  - Carte statique INSEE FiLoSoFi 2021 (seuil 60% médian)
-
-- [ ] **Mode Comparaison** — 2 départements côte à côte
-  - Composant prévu : `src/components/shared/ComparePanel.tsx`
-
-- [ ] **Carte chômage réelle** — remplacer `DEPT_UNEMPLOYMENT_MOCK` dans `src/app/economy/EconomyCharts.tsx` par vraies données INSEE par département
-
-- [ ] **Barre de recherche globale** — activer la recherche dans `src/components/layout/Header.tsx` (le champ est déjà rendu, il faut brancher la navigation)
-
-- [ ] **Menu mobile** — drawer Sidebar pour petits écrans (bouton `<Menu>` dans `Header.tsx` déjà présent mais non branché)
-
 ## Fait
 
 - [x] Layout + Sidebar DSFR
@@ -23,3 +8,13 @@
 - [x] Module Santé (espérance de vie H/F, dépenses, mortalité, médecins — DBnomics Eurostat)
 - [x] Composants : `TimeSeriesChart`, `MultiLineChart`, `BarChart`, `FranceMap`, `StatCard`, `ExportButton`
 - [x] `parsePeriod()` — fix filtrage 5Y/10Y sur données trimestrielles/annuelles
+- [x] Module Social — taux de pauvreté H/F, Gini, risque exclusion, carte par département
+  - Eurostat: `ilc_li02` (pauvreté), `ilc_di12` (Gini), `ilc_peps01` (exclusion)
+- [x] Données départementales complètes centralisées dans `src/lib/departmentData.ts`
+  - Chômage : INSEE BIT T4 2025 — 99 départements (96 métro + 3 DOM)
+  - Pauvreté : INSEE FiLoSoFi 2021 — 101 départements (96 métro + 5 DOM)
+  - Densité médicale : DREES 2023 — couverture étendue
+- [x] Carte chômage réelle — remplacé le mock dans `EconomyCharts` par les vraies données INSEE
+- [x] Mode Comparaison — `ComparePanel` drawer droit, 2 départements, 3 indicateurs, barres comparatives
+- [x] Barre de recherche globale — modules + indicateurs + départements, dropdown résultats
+- [x] Menu mobile — drawer Sidebar animé, backdrop, bouton fermeture

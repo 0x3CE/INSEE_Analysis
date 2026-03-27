@@ -11,17 +11,7 @@ import { FranceMap } from "@/components/map/FranceMap";
 import { ExportButton } from "@/components/shared/ExportButton";
 import type { DataPoint } from "@/types";
 import { parsePeriod } from "@/lib/utils";
-
-// Synthetic department-level unemployment data (real data would come from INSEE API)
-// Replace with actual API call to INSEEClient.getSeries() per department.
-const DEPT_UNEMPLOYMENT_MOCK: { code: string; value: number }[] = [
-  { code: "75", value: 7.2 }, { code: "69", value: 7.8 }, { code: "13", value: 12.1 },
-  { code: "31", value: 9.4 }, { code: "33", value: 9.8 }, { code: "44", value: 7.1 },
-  { code: "59", value: 12.8 }, { code: "67", value: 7.4 }, { code: "06", value: 10.2 },
-  { code: "34", value: 11.5 }, { code: "76", value: 9.1 }, { code: "35", value: 6.9 },
-  { code: "57", value: 10.3 }, { code: "972", value: 17.2 }, { code: "974", value: 18.1 },
-  { code: "971", value: 19.3 }, { code: "973", value: 15.4 },
-];
+import { DEPT_UNEMPLOYMENT } from "@/lib/departmentData";
 
 type Period = "5Y" | "10Y" | "ALL";
 
@@ -150,11 +140,11 @@ export function EconomyCharts({ unemployment, gdp, inflation }: EconomyChartsPro
             Taux de chômage par département
           </h3>
           <p className="text-xs text-gray-500 mt-0.5">
-            Données illustratives — connecter à l&apos;API INSEE pour les vraies valeurs
+            % actifs au sens du BIT — INSEE, T4 2025 (provisoire)
           </p>
         </div>
         <FranceMap
-          data={DEPT_UNEMPLOYMENT_MOCK}
+          data={DEPT_UNEMPLOYMENT}
           unit="%"
           colorScale={["#e8edff", "#003189"]}
         />

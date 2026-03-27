@@ -4,6 +4,7 @@ import { Providers } from "./providers";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { Analytics } from "@vercel/analytics/next";
+import { ComparePanel } from "@/components/shared/ComparePanel";
 
 export const metadata: Metadata = {
   title: "Observatoire National",
@@ -27,6 +28,7 @@ export default function RootLayout({
               <main className="flex-1 p-6 overflow-auto">{children}</main>
             </div>
           </div>
+          <ComparePanel />
         </Providers>
         <Analytics />
       </body>
